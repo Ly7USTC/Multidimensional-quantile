@@ -1,0 +1,49 @@
+mqnorm_rcone<-function(q,b,mu=c(0,0),Sigma=diag(2),C=c(0,pi/2)){
+ #Approximate beta-vorobev-quantile for standard normal distribution and uniform cone.
+  Nw<-100
+  A<-seq(C[1],C[2],length.out=Nw)
+  W<-cbind(cos(A),sin(A))
+  Q<-rep(0,Nw)
+  for (i in 1:Nw) {
+    Q[i]<-qnorm(q,mean=sum(W[i,]*mu),sd=sqrt(W[i,1]^2*Sigma[1,1]+W[i,2]^2*Sigma[2,2]+2*W[i,1]*W[i,2]*Sigma[1,2]))
+  }
+  x<-seq(-5,5,by=0.01)
+  y<-seq(-5,5,by=0.01)
+  Z<-as.matrix(expand.grid(x=x,y=y))
+  L<-rep(0,nrow(Z))
+  for (i in 1:nrow(Z)) {
+    L[i]<-as.numeric(mean(W%*%Z[i,]>=Q)>=b)
+  }
+  P<-as.data.frame(Z[-(which(L==0)),])
+  ggplot(data=P,aes(x=P[,1],y=P[,2]))+xlim(c(-4,4))+ylim(c(-4,4))+
+    geom_point(data=P,aes(x=P[,1],y=P[,2],alpha=0.1),col='red',shape='.')
+}
+
+
+mqnorm_rcone_notuni<-function(q,mu=c(0,0),Sigma=diag(2),C=c(0,pi/2)){
+ # for one non-uniform cone
+  Nwe<-100
+  Nw<-400
+  A1<-seq(C[1],C[2]/3,length.out=2*Nwe)
+  A2<-seq(C[2]/3,2*C[2]/3,length.out=Nwe)
+  A3<-seq(2*C[2]/3,C[2],length.out=Nwe)
+  A<-c(A1,A2,A3)
+  W<-cbind(cos(A),sin(A))
+  Q<-rep(0,Nw)
+  for (i in 1:Nw) {
+    Q[i]<-qnorm(q,mean=sum(W[i,]*mu),sd=sqrt(W[i,1]^2*Sigma[1,1]+W[i,2]^2*Sigma[2,2]+2*W[i,1]*W[i,2]*Sigma[1,2]))
+  }
+  x<-seq(-5,5,by=0.01)
+  y<-seq(-5,5,by=0.01)
+  Z<-as.matrix(expand.grid(x=x,y=y))
+  L<-rep(0,nrow(Z))
+  for (i in 1:nrow(Z)) {
+    L[i]<-as.numeric(mean(W%*%Z[i,]>=Q)>=q)
+  }
+  P<-as.data.frame(Z[-(which(L==0)),])
+  #ggplot(P, aes(x = x))
+  ggplot(data=P,aes(x=P[,1],y=P[,2]))+xlim(c(-4,4))+ylim(c(-4,4))+
+    geom_point(data=P,aes(x=P[,1],y=P[,2],alpha=0.1),col='red',shape='.')
+  #plot(P,cex=0.1)
+}
+mqnorm_rcone_notuni(0.9)
