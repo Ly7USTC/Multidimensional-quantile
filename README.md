@@ -10,11 +10,11 @@ A univariate quantile is a number. For a random vector there is no natural order
 
 ### Cone quantiles
 
-Let $X$ be a random vector in $\mathbb{R}^2$ and let $C$ be a convex cone with dual cone $C^+ = \{w : w^\top c \ge 0 \text{ for all } c \in C\}$. Following Hamel & Kostner (2018), the lower $C$-quantile at level $q \in (0,1)$ is the set
+Let $X$ be a random vector in $\mathbb{R}^2$ and let $C$ be a convex cone with dual cone $C^+ = \lbrace w : w^\top c \ge 0 \text{ for all } c \in C\rbrace$. Following Hamel & Kostner (2018), the lower $C$-quantile at level $q \in (0,1)$ is the set
 
-$$
-Q_{X,C}(q) \;=\; \bigcap_{w \in C^+\setminus\{0\}} \big\{\, z \in \mathbb{R}^2 : w^\top z \;\ge\; q_{w^\top X}(q) \,\big\},
-$$
+```math
+Q_{X,C}(q) \;=\; \bigcap_{w \in C^+\setminus\lbrace 0\rbrace} \bigl\lbrace\, z \in \mathbb{R}^2 : w^\top z \;\ge\; q_{w^\top X}(q) \,\bigr\rbrace,
+```
 
 where $q_{w^\top X}(q)$ is the ordinary univariate $q$-quantile of the projection $w^\top X$. Each direction $w$ gives a half-plane, and the quantile region is their intersection. With the default cone $C = \mathbb{R}^2_+$, the dual cone is also $\mathbb{R}^2_+$.
 
@@ -22,11 +22,11 @@ The code builds $C^+$ from the edges of $C$. It discretises $C^+$ into 101 direc
 
 ### β-Vorob'ev quantiles
 
-If the direction $W$ is random instead of ranging over all of $C^+$, then $H_W = \{z : W^\top z \ge q_{W^\top X}(q)\}$ is a random half-plane. Its β-Vorob'ev quantile is the set of points covered with probability at least β:
+If the direction $W$ is random instead of ranging over all of $C^+$, then $H_W = \lbrace z : W^\top z \ge q_{W^\top X}(q)\rbrace$ is a random half-plane. Its β-Vorob'ev quantile is the set of points covered with probability at least β:
 
-$$
-V_\beta \;=\; \{\, z : \mathbb{P}(z \in H_W) \ge \beta \,\}.
-$$
+```math
+V_\beta \;=\; \lbrace \, z : \mathbb{P}(z \in H_W) \ge \beta \,\rbrace.
+```
 
 For β = 1 this recovers the intersection above. For β < 1 it gives a larger region that is less driven by extreme directions.
 
