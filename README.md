@@ -160,7 +160,7 @@ mqnorm_rcone(q = 0.5, b = 0.8)
 
 ## Reference
 
-A. H. Hamel and D. Kostner (2018). *Cone distribution functions and quantiles for multivariate random variables.* Journal of Multivariate Analysis, 167, 97–113. [arXiv:1611.06353](https://arxiv.org/abs/1611.06353)
+A. H. Hamel and D. Kostner (2018). *Cone distribution functions and quantiles for multivariate random variables.* *Journal of Multivariate Analysis*, 167, 97–113. [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0047259X17301082)
 
 ## Author
 
